@@ -11,7 +11,7 @@ namespace GaussJordan
     {
         static double[,] a;
         static double[] b;
-        static int n = 1024;
+        static int n = 200;
 
 
         static void Main(string[] args)
@@ -30,23 +30,29 @@ namespace GaussJordan
             watch.Start();
             result = obj.Calcuale(a, b, n);
             watch.Stop();
-            //PrintResultTable(result);
-            Console.WriteLine(watch.ElapsedMilliseconds);
+            Console.WriteLine("first 10 results");
+            PrintResultTable(result);
+            Console.WriteLine("...");
+            Console.WriteLine(string.Format("single thread: {0} [ms]",watch.ElapsedMilliseconds));
+            Console.WriteLine("");
 
             watch.Reset();
+
             watch.Start();
             result = obj.CalcualeParallel(a, b, n);
             watch.Stop();
             Console.WriteLine("");
-            //PrintResultTable(result);
-            Console.WriteLine(watch.ElapsedMilliseconds);
+            Console.WriteLine("first 10 results");
+            PrintResultTable(result);
+            Console.WriteLine("...");
+            Console.WriteLine(string.Format("multi thread: {0} [ms]", watch.ElapsedMilliseconds));
 
             Console.ReadKey();
         }        
 
         static void PrintResultTable(double[] result)
         {
-            for (int i = 0; i < result.Count(); i++)
+            for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine(result[i] + " ");
             }
